@@ -27,6 +27,13 @@ def draw_monitor():
    pygame.draw.rect(test_surface, "Blue", monitor)
    return monitor
 
+def draw_moneyboarder(y_const):
+   money_frame = pygame.Rect(930, y_const, 270, 100)
+   money_frame_black = pygame.Rect(940, y_const + 10, 250, 80)
+   pygame.draw.rect(screen, "Brown", money_frame)
+   pygame.draw.rect(screen, "Black", money_frame_black)
+
+#Game
 while True:
 
 #Closing the window
@@ -49,8 +56,10 @@ while True:
     screen.blit(background,(0, 0)) #Draws game screen
     screen.blit(test_surface,(60, 60)) #Draws game window
     monitor = draw_monitor() #Draws monitor
-    paperclips = font.render(f"Paperclips: {monitor_value}", 16, "White")
-    screen.blit(paperclips, (1000, 20))
+
+    draw_moneyboarder(55)
+    paperclips = font.render(f"Paperclips: {monitor_value}", 25, "White") #Renders the font and text
+    screen.blit(paperclips, (1010, 100)) #Draws the text and current 
 
     pygame.display.update()
     clock.tick(framerate)  # limits FPS to 60
