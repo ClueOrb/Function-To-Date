@@ -15,7 +15,8 @@ clock = pygame.time.Clock()
 test_surface = pygame.Surface((720, 500))
 test_surface.fill("Black")
 background = pygame.image.load("graphic/assets/mainbg.png")
-font = pygame.font.Font("freesansbold.ttf", 16)
+font_placeholder = pygame.font.Font("freesansbold.ttf", 18)
+font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 18)
 
 #variables
 monitor_value = 0
@@ -27,11 +28,17 @@ def draw_monitor():
    pygame.draw.rect(test_surface, "Blue", monitor)
    return monitor
 
-def draw_moneyboarder(y_const):
-   money_frame = pygame.Rect(930, y_const, 270, 100)
-   money_frame_black = pygame.Rect(940, y_const + 10, 250, 80)
+def draw_moneyboarder(x_const, y_const):
+   money_frame = pygame.Rect(x_const, y_const, 380, 100)
+   money_frame_black = pygame.Rect(x_const + 10, y_const + 10, 360, 80)
    pygame.draw.rect(screen, "Brown", money_frame)
    pygame.draw.rect(screen, "Black", money_frame_black)
+
+def draw_upgrade(x_const, y_const):
+   upgrade_frame = pygame.Rect(x_const, y_const, 380, 80)
+   upgrade_frame_black = pygame.Rect(x_const + 5, y_const + 5, 370, 70)
+   pygame.draw.rect(screen, "Brown", upgrade_frame)
+   pygame.draw.rect(screen, "Black", upgrade_frame_black)
 
 #Game
 while True:
@@ -57,9 +64,14 @@ while True:
     screen.blit(test_surface,(60, 60)) #Draws game window
     monitor = draw_monitor() #Draws monitor
 
-    draw_moneyboarder(55)
-    paperclips = font.render(f"Paperclips: {monitor_value}", 25, "White") #Renders the font and text
-    screen.blit(paperclips, (1010, 100)) #Draws the text and current 
+    draw_moneyboarder(850, 55)
+    paperclips = font.render(f"Paperclips: {monitor_value}", 0, "White") #Renders the font and text
+    screen.blit(paperclips, (890, 100)) #Draws the text and current 
+
+    draw_upgrade(850, 180)
+    draw_upgrade(850, 280)
+    draw_upgrade(850, 380)
+    draw_upgrade(850, 500)
 
     pygame.display.update()
     clock.tick(framerate)  # limits FPS to 60
