@@ -19,8 +19,13 @@ font_placeholder = pygame.font.Font("freesansbold.ttf", 18)
 font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 18)
 
 #variables
-monitor_value = 0
+paperclips = 0
 monitor_clicked = False
+setup_lvl = 1
+desk_lvl = 1
+decor_lvl = 1
+boss_lvl = 1
+current_value = 1
 
 #functions
 def draw_monitor():
@@ -44,34 +49,34 @@ def draw_upgrade(x_const, y_const):
 while True:
 
 #Closing the window
-    for event in pygame.event.get():
+   for event in pygame.event.get():
        if event.type == pygame.QUIT:
         pygame.quit()
         exit()
 
-    monitor_hitbox = pygame.Rect(60 + 250, 60 + 250, 200, 170)
+   monitor_hitbox = pygame.Rect(60 + 250, 60 + 250, 200, 170)
 
-    if event.type == pygame.MOUSEBUTTONDOWN and monitor_clicked == False:
+   if event.type == pygame.MOUSEBUTTONDOWN and monitor_clicked == False:
        if monitor_hitbox.collidepoint(event.pos):
-          monitor_value += 1
+          paperclips += current_value
           monitor_clicked = True
-    elif event.type == pygame.MOUSEBUTTONUP and monitor_clicked == True:
+   elif event.type == pygame.MOUSEBUTTONUP and monitor_clicked == True:
           time.sleep(0.05)
           monitor_clicked = False
           
 
-    screen.blit(background,(0, 0)) #Draws game screen
-    screen.blit(test_surface,(60, 60)) #Draws game window
-    monitor = draw_monitor() #Draws monitor
+   screen.blit(background,(0, 0)) #Draws game screen
+   screen.blit(test_surface,(60, 60)) #Draws game window
+   monitor = draw_monitor() #Draws monitor
 
-    draw_moneyboarder(850, 55)
-    paperclips = font.render(f"Paperclips: {monitor_value}", 0, "White") #Renders the font and text
-    screen.blit(paperclips, (890, 100)) #Draws the text and current 
+   draw_moneyboarder(850, 55)
+   paperclips_text = font.render(f"Paperclips: {paperclips}", 0, "White") #Renders the font and text
+   screen.blit(paperclips_text, (890, 100)) #Draws the text and current 
 
-    draw_upgrade(850, 180)
-    draw_upgrade(850, 280)
-    draw_upgrade(850, 380)
-    draw_upgrade(850, 500)
+   draw_upgrade(850, 180)
+   draw_upgrade(850, 280)
+   draw_upgrade(850, 380)
+   draw_upgrade(850, 500)
 
-    pygame.display.update()
-    clock.tick(framerate)  # limits FPS to 60
+   pygame.display.update()
+   clock.tick(framerate)  # limits FPS to 60
