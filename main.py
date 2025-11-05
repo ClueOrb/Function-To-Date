@@ -73,7 +73,6 @@ while True:
         exit()
 
    monitor_hitbox = pygame.Rect(60 + 250, 60 + 250, 200, 170)
-   pygame.draw.rect(test_surface, "red", monitor_hitbox)
 
    if event.type == pygame.MOUSEBUTTONDOWN and monitor_clicked == False: #If mouse is clicked
        if monitor_hitbox.collidepoint(event.pos):
