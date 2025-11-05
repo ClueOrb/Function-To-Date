@@ -15,17 +15,35 @@ clock = pygame.time.Clock()
 test_surface = pygame.Surface((720, 500))
 test_surface.fill("Black")
 background = pygame.image.load("graphic/assets/mainbg.png")
-font_placeholder = pygame.font.Font("freesansbold.ttf", 18)
-font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 18)
+font_placeholder = pygame.font.Font("freesansbold.ttf", 15)
+font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 15)
 
 #variables
 paperclips = 0
 monitor_clicked = False
+current_value = 1
+
+#for upgrades
 setup_lvl = 1
 desk_lvl = 1
 decor_lvl = 1
 boss_lvl = 1
-current_value = 1
+
+#for display
+dis_setup_lvl = 1
+dis_desk_lvl = 1
+dis_decor_lvl = 1
+dis_boss_lvl = 1
+
+setup_req = 25
+desk_req = 10
+decor_req = 5
+boss_req = 100
+
+#display variables
+upgrade_x = 820
+
+
 
 #functions
 def draw_monitor():
@@ -33,15 +51,15 @@ def draw_monitor():
    pygame.draw.rect(test_surface, "Blue", monitor)
    return monitor
 
-def draw_moneyboarder(x_const, y_const):
-   money_frame = pygame.Rect(x_const, y_const, 380, 100)
-   money_frame_black = pygame.Rect(x_const + 10, y_const + 10, 360, 80)
+def draw_money(x_const, y_const):
+   money_frame = pygame.Rect(x_const, y_const, 450, 100)
+   money_frame_black = pygame.Rect(x_const + 10, y_const + 10, 430, 80)
    pygame.draw.rect(screen, "Brown", money_frame)
    pygame.draw.rect(screen, "Black", money_frame_black)
 
 def draw_upgrade(x_const, y_const):
-   upgrade_frame = pygame.Rect(x_const, y_const, 380, 80)
-   upgrade_frame_black = pygame.Rect(x_const + 5, y_const + 5, 370, 70)
+   upgrade_frame = pygame.Rect(x_const, y_const, 450, 80)
+   upgrade_frame_black = pygame.Rect(x_const + 5, y_const + 5, 440, 70)
    pygame.draw.rect(screen, "Brown", upgrade_frame)
    pygame.draw.rect(screen, "Black", upgrade_frame_black)
 
@@ -55,12 +73,13 @@ while True:
         exit()
 
    monitor_hitbox = pygame.Rect(60 + 250, 60 + 250, 200, 170)
+   pygame.draw.rect(test_surface, "red", monitor_hitbox)
 
-   if event.type == pygame.MOUSEBUTTONDOWN and monitor_clicked == False:
+   if event.type == pygame.MOUSEBUTTONDOWN and monitor_clicked == False: #If mouse is clicked
        if monitor_hitbox.collidepoint(event.pos):
           paperclips += current_value
           monitor_clicked = True
-   elif event.type == pygame.MOUSEBUTTONUP and monitor_clicked == True:
+   elif event.type == pygame.MOUSEBUTTONUP and monitor_clicked == True: #If mouse is released
           time.sleep(0.05)
           monitor_clicked = False
           
@@ -69,14 +88,30 @@ while True:
    screen.blit(test_surface,(60, 60)) #Draws game window
    monitor = draw_monitor() #Draws monitor
 
-   draw_moneyboarder(850, 55)
+   draw_money(800, 55)
    paperclips_text = font.render(f"Paperclips: {paperclips}", 0, "White") #Renders the font and text
-   screen.blit(paperclips_text, (890, 100)) #Draws the text and current 
+   screen.blit(paperclips_text, (870, 100)) #Draws the text and current 
 
-   draw_upgrade(850, 180)
-   draw_upgrade(850, 280)
-   draw_upgrade(850, 380)
-   draw_upgrade(850, 500)
+
+   #Desk
+   desk = draw_upgrade(800, 180)
+   desk_up_text = font.render(f"Desk level: {desk_lvl}", 0, "White") 
+   screen.blit(desk_up_text, (upgrade_x, 215))
+
+   #Computer set up
+   draw_upgrade(800, 280)
+   computer_up_text = font.render(f"Computer level: {setup_lvl}", 0, "White") 
+   screen.blit(computer_up_text, (upgrade_x, 315)) 
+
+   #Desk Decor
+   draw_upgrade(800, 380)
+   decor_up_text = font.render(f"Desk asseccory level: {decor_lvl}", 0, "White") 
+   screen.blit(decor_up_text, (upgrade_x, 415)) 
+
+   #Boss
+   draw_upgrade(800, 600)
+   decor_up_text = font.render(f"Boss affection: {decor_lvl}", 0, "White") 
+   screen.blit(decor_up_text, (upgrade_x, 635)) 
 
    pygame.display.update()
    clock.tick(framerate)  # limits FPS to 60
