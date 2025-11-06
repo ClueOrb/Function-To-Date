@@ -58,8 +58,6 @@ def draw_money(x_const, y_const):
    pygame.draw.rect(screen, "Black", money_frame_black)
 
 def draw_upgrade(x_const, y_const):
-   upgrade_frame = pygame.Rect(x_const, y_const, 380, 80)
-   upgrade_frame_black = pygame.Rect(x_const + 5, y_const + 5, 370, 70)
    upgrade_frame = pygame.Rect(x_const, y_const, 450, 80)
    upgrade_frame_black = pygame.Rect(x_const + 5, y_const + 5, 440, 70)
    pygame.draw.rect(screen, "Brown", upgrade_frame)
@@ -81,9 +79,16 @@ while True:
             paperclips += current_value
             monitor_clicked = True
       elif event.type == pygame.MOUSEBUTTONUP and monitor_clicked == True: #If mouse is released
-          time.sleep(0.05)
-          monitor_clicked = False
+         time.sleep(0.05)
+         monitor_clicked = False
 
+      desk_hitbox = pygame.Rect(800, 180, 450, 100)
+
+      if event.type == pygame.MOUSEBUTTONDOWN:
+         if desk_hitbox.collidepoint(event.pos):
+            if paperclips >= desk_req and desk_lvl < 5:
+               desk_lvl += 1
+               paperclips -= desk_req
 
    screen.blit(background,(0, 0)) #Draws game screen
    screen.blit(test_surface,(60, 60)) #Draws game window
@@ -96,7 +101,7 @@ while True:
 
 
    #Desk
-   desk = draw_upgrade(800, 180)
+   draw_upgrade(800, 180)
    desk_up_text = font.render(f"Desk level: {desk_lvl}", 0, "White") 
    screen.blit(desk_up_text, (upgrade_x, 215))
 
