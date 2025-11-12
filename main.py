@@ -61,6 +61,10 @@ def draw_monitor(x_pos, y_pos):
    monitor = pygame.rect.Rect((x_pos, y_pos), (200, 170))
    pygame.draw.rect(office_surface, "Blue", monitor)
 
+def draw_table(x_pos, y_pos):
+   desk = pygame.rect.Rect((x_pos, y_pos), (650, 250))
+   pygame.draw.rect(office_surface, "Green", desk)
+
 #---Game---#
 while True:
 
@@ -187,6 +191,9 @@ while True:
 
    screen.blit(office_surface, (50, 50))
    screen.blit(upgrade_surface, (740, 50))
+
+#--Table--#
+   table = draw_table(15, 400)
 
 #--Monitor--#
    monitor = draw_monitor(150, 300)
