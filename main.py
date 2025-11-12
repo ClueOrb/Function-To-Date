@@ -15,6 +15,8 @@ office_surface = pygame.Surface((680, 610))
 office_surface.fill("Red")
 upgrade_surface = pygame.Surface((490, 610))
 upgrade_surface.fill("Blue")
+cutscene_surface = pygame.Surface((1280, 720))
+cutscene_surface.fill("Black")
 
 #---Variables---#
    #--Fonts--#
@@ -23,7 +25,7 @@ value_font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 25)
 upgrade_font = pygame.font.Font("graphic/font/GoldenAgeShad.ttf", 17)
 
    #--Values--#
-currency = 0
+currency = 100000
 earn_value = 1
 
    #--Parameters--#
@@ -154,6 +156,31 @@ while True:
                currency -= decor_req
                decor_lvl = "MAX"
                earn_value += 2
+
+      #--Boss Upgrade--#
+      boss_hitbox = pygame.rect.Rect((740 + 5, 50 + 515), (480, 80))
+
+      if event.type == pygame.MOUSEBUTTONDOWN and currency >=boss_req:
+         if boss_hitbox.collidepoint(event.pos):
+            if currency >= boss_req and boss_lvl == 1:  # Level 1 → 2
+               currency -= boss_req
+               boss_req = 5000
+               boss_lvl += 1
+               earn_value += 1
+            elif currency >= boss_req and boss_lvl == 2:  # Level 2 → 3
+               currency -= boss_req
+               boss_req = 8000
+               boss_lvl += 1
+               earn_value += 1
+            elif currency >= boss_req and boss_lvl == 3:  # Level 3 → 4
+               currency -= boss_req
+               boss_req = 15000
+               boss_lvl += 1
+               earn_value += 2
+            elif currency >= boss_req and boss_lvl == 4:  # Level 4 → 5
+               currency -= boss_req
+               boss_lvl = "MAX"
+               earn_value += 2
             
 
 #--Surfaces--#
@@ -204,6 +231,17 @@ while True:
    screen.blit(decor_req_text, (1045, 505))
 
    boss = draw_upgrade(5, 515, 90, 480)
+   boss_up_text = upgrade_font.render(f"Boss lvl: {boss_lvl}", False, "White")
+   if boss_lvl == "MAX":
+      boss_req_text = upgrade_font.render(f"Fully upgraded", False, "White")
+   else:
+      boss_req_text = upgrade_font.render(f"Upgrade: {boss_req}", False, "White")
+   screen.blit(boss_up_text, (760, 580))
+   screen.blit(boss_req_text, (1045, 630))
+
+   if boss_lvl == "MAX" and desk_lvl == "MAX" and decor_lvl == "MAX" and computer_lvl == "MAX":
+      time.sleep(1)
+      screen.blit(cutscene_surface, (0, 0))
 
    pygame.display.update()
    clock.tick(framerate)  #limits FPS to 60
