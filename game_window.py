@@ -1,7 +1,7 @@
 import pygame
 
 #---Main set up (Screen, Title)---#
-class MainSetUp():
+class window():
 
     screen = pygame.display.set_mode((1280, 720), 0)
     pygame.display.set_caption('Function to Date')
@@ -10,7 +10,7 @@ class MainSetUp():
 
     clock = pygame.time.Clock()
 
-class GameWindow():
+class game():
     #---Screen assets---#
     game_background = pygame.image.load("graphic/assets/mainbg.png")
     office_surface = pygame.Surface((680, 610))
