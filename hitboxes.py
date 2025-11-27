@@ -2,7 +2,7 @@ import pygame
 from game_window import game
 
 class hb():
-    monitor_hb = pygame.rect.Rect((50 + 150, 50 + 300), (200, 170))
+    monitor_hb = pygame.rect.Rect((50 + 150, 50 + 270), (190, 170))
     #pygame.draw.rect(game.office_surface, "red", monitor_hb)
 
     pc_hb = pygame.rect.Rect((740 + 5, 50 + 160), (480, 80))

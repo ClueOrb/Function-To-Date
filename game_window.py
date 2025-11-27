@@ -5,15 +5,15 @@ class window():
 
     screen = pygame.display.set_mode((1280, 720), 0)
     pygame.display.set_caption('Function to Date')
-    icon = pygame.image.load("graphic/icon.png")
+    icon = pygame.image.load("graphic/Icon.png")
     pygame.display.set_icon(icon)
 
     clock = pygame.time.Clock()
 
 class game():
     #---Screen assets---#
-    game_background = pygame.image.load("graphic/assets/mainbg.png")
+    game_background = pygame.image.load("graphic/mainbg.png")
     office_surface = pygame.Surface((680, 610))
     office_surface.fill("White")
     upgrade_surface = pygame.Surface((490, 610))
-    upgrade_surface.fill("Red")
+    upgrade_surface.fill("Black")

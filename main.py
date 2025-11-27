@@ -108,14 +108,19 @@ while True:
    window.screen.blit(game.office_surface, (50, 50))
    window.screen.blit(game.upgrade_surface, (740, 50))
 
+#--Boss--#
+
+   draw.draw_boss(300, 50)
+
 
 #--Table--#
 
-   draw.draw_table(15, 400)
+   draw.draw_desk(50, 60)
 
 #--Monitor--#
 
-   draw.draw_monitor(200, 340)
+   draw.draw_monitor(180, 315)
+   pygame.draw.rect(game.office_surface, "red", hb.monitor_hb)
 
 #--Upgrade Window--#
    #--Paperclip counter--#

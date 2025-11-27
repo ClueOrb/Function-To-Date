@@ -20,12 +20,16 @@ class draw():
         pygame.draw.rect(game.upgrade_surface, "Black", padding)
 
     def draw_monitor(x_pos, y_pos):
-        monitor = pygame.image.load("graphic/assets/computer_lvl1.png")
+        monitor = pygame.image.load("graphic/PC.png")
         window.screen.blit(monitor, (x_pos, y_pos))
 
-    def draw_table(x_pos, y_pos):
-        desk = pygame.rect.Rect((x_pos, y_pos), (650, 250))
-        pygame.draw.rect(game.office_surface, "Green", desk)
+    def draw_desk(x_pos, y_pos):
+        desk = pygame.image.load("graphic/Desk.png")
+        window.screen.blit(desk, (x_pos, y_pos))
+
+    def draw_boss(x_pos, y_pos):
+        desk = pygame.image.load("graphic/Boss.png")
+        window.screen.blit(desk, (x_pos, y_pos))
 
 def exit():
         pygame.quit()
