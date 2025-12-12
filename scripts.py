@@ -31,6 +31,14 @@ class draw():
         desk = pygame.image.load("graphic/Boss.png")
         window.screen.blit(desk, (x_pos, y_pos))
 
-def exit():
+    def exit():
         pygame.quit()
         exit()
+
+class func():
+    
+    def earn():
+        add = base.earn_value
+        sum = base.currency
+        sum += add
+        return sum

@@ -17,7 +17,7 @@ while True:
 
       #--Monitor clicking function--#
       if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed()[0] and hb.monitor_hb.collidepoint(event.pos): #--Checking if left mouse button gets pressed on the monitor hitbox--#
-         base.currency += base.earn_value
+         base.currency = func.earn()
 
       #--Computer Upgrade--#
       if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed()[0] and hb.pc_hb.collidepoint(event.pos) and base.currency >= cost.pc_req:
@@ -89,11 +89,13 @@ while True:
             4: (0, 5),
          }
 
-         if isinstance(level.boss_lvl, int) and level.boss_lvl in boss_progress:
+         if level.boss_lvl in boss_progress:
             base.currency -= cost.boss_req
             next_req, gain = boss_progress[level.boss_lvl]
             base.earn_value += gain
-         if level.boss_lvl == 4:
+         if level.boss_lvl == "MAX":
+               pass
+         elif level.boss_lvl == 4:
                level.boss_lvl = "MAX"
                cost.boss_req = 0
          else:
@@ -125,7 +127,7 @@ while True:
 #--Upgrade Window--#
    #--Paperclip counter--#
    draw.draw_counter(5, 5, 120, 480)
-   counter_text = font.value_title_font.render("Counter:", False, "White")
+   counter_text = font.value_title_font.render("Paperclip counter:", False, "White")
    window.screen.blit(counter_text, (760, 70))
    currency_text = font.value_font.render(f"{base.currency}", False, "White")
    window.screen.blit(currency_text, (800, 120))
